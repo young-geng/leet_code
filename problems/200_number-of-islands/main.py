@@ -31,3 +31,11 @@ class Solution(object):
                     dfs(i, j)
                     cc_count += 1
         return cc_count
+
+# BFS Solution for practice
+# class AlternativeSolution(object):
+#     def numIslands(self, grid):
+#         """
+#         :type grid: List[List[str]]
+#         :rtype: int
+#         """
