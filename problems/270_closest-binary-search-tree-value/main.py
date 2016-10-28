@@ -30,3 +30,23 @@ class Solution(object):
         b = self.closestValue(child, target)
         # we can make min behave like argmin by passing a function
         return min((a, b), key=lambda v:abs(target-v))
+
+    def iterative_closestValue(self, root, target):
+        path = []
+        while root:
+            path.append(root.val)
+            if target < root.val:
+                root = root.left
+            else:
+                root = root.right
+        return min(path, key=lambda v: abs(target-v))
+
+    def space_efficient_closestValue(self,root, target):
+        closest_seen = root.val
+        while root:
+            closest_seen = min((root.val, closest_seen), key=lambda v: abs(target-v))
+            if target < root.val:
+                root = root.left
+            else:
+                root = root.right
+        return closest_seen
