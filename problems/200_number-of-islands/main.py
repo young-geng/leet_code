@@ -54,7 +54,7 @@ class BFSSolution(object):
     def bfs(self, grid, i, j):
         cols, rows = len(grid), len(grid[0])
         q = Queue.Queue()
-        q.put([i,j))
+        q.put([i,j])
         while not q.empty():
             x, y = q.get()
             if grid[x][y] == '1':
@@ -65,5 +65,5 @@ class BFSSolution(object):
                 self.pushToQueue(q, cols, rows, x, y+1)
 
     def pushToQueue(self, q, cols, rows, i, j):
-        if i >= 0 and i < cols and j >= 0 and j <= rows:
+        if i >= 0 and i < cols and j >= 0 and j < rows:
             q.put([i,j])
