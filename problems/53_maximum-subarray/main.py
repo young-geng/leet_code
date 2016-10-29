@@ -5,10 +5,12 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        max_sofar = nums[0]
-        sums = [0]*len(nums)
-        sums[0] = nums[0]
-        for i in xrange(1, len(nums)):
-            sums[i] = max(nums[i], sums[i-1] + nums[i])
-            max_sofar = max(max_sofar, sums[i])
-        return max_sofar
+        # This is Kadane's Algorithm
+        # Runtime O(n)
+        # Space O(1)
+        max_ending_here = nums[0]
+        max_so_far = nums[0]
+        for x in nums[1:]:
+            max_ending_here = max(x, max_ending_here + x)
+            max_so_far = max(max_so_far, max_ending_here)
+        return max_so_far
