@@ -57,6 +57,7 @@ class BFSSolution(object):
         q.put([i,j])
         while not q.empty():
             x, y = q.get()
+            # if the point is not visited, a.k.a '1'
             if grid[x][y] == '1':
                 grid[x][y] = '0'
                 self.pushToQueue(q, cols, rows, x-1, y)
