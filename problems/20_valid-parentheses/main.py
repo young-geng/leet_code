@@ -10,9 +10,12 @@ class Solution(object):
         stack = []
 
         for i in xrange(len(s)):
-            # if its opening it, its it getting deeper so add to stack
+            # if its opening it, its getting deeper so add to stack
             if s[i] in "([{":
                 stack.append(s[i])
+            # if not it must be a closing parenth
+            # in which case check if stack is empty if not pop and check
+            # whether popped elem is closed with the current item
             else:
                 if len(stack) == 0:
                     return False
