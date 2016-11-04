@@ -24,3 +24,8 @@ class Solution(object):
             node = stack.pop()
             l.append(node.val)
             root = node.right
+
+    def recursive(self, root):
+        if not root:
+            return []
+        return self.recursive(root.left) + [root.val] + self.recursive(root.right)
