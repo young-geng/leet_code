@@ -33,6 +33,7 @@ class Solution(object):
         return cc_count
 
 # BFS Solution for practice
+# Runtime: O(cN) => O(N)
 import Queue
 class BFSSolution(object):
     def numIslands(self, grid):
