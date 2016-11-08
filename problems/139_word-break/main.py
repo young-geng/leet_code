@@ -31,6 +31,8 @@ class Solution(object):
         for i in xrange(1, len(s)+1):
             for j in xrange(i):
                 substring = s[j:i]
+
+                # if we can segment at position i with j.
                 if segmentable[j] and substring in wordDict:
                     segmentable[i] = True
                     break
