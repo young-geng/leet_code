@@ -36,3 +36,11 @@ class Solution(object):
         #     if not root and len(stack) > 0:
         #         root = stack.pop()
         # return lst
+
+    def recursivePreorder(self, root):
+        if not root:
+            return []
+        lst.append(root.val)
+        lst += self.recursivePreorder(root.left)
+        lst += self.recursivePreorder(root.right)
+        return lst
