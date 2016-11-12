@@ -1,6 +1,8 @@
 # https://leetcode.com/problems/missing-ranges/
 
 # Algorithm:
+# Move throught the nums array. For each point indicate what is the missing range.
+
 # We will keep a marker pointing to the lowest missing range at first
 # and we will keep updating this marker pointer to add missing ranges. This
 # is equivalent as thinking it as a number line and just grabbing chunks of
