@@ -6,6 +6,15 @@
 #         self.start = s
 #         self.end = e
 
+
+
+# Algorithm
+# Two intervals i1 and i2 can be overlapping if and only if
+#     * i2.start <= i1.end
+# If this is the case two intervals can be merged by this process:
+#     * make start equal to the min of the two interval starts.
+#     * make the end equal to the max of the two interval ends.
+
 class Solution(object):
     def merge(self, intervals):
         """
@@ -24,6 +33,7 @@ class Solution(object):
         if len(intervals) == 0: return []
 
         output = []
+        # sort intervals by start
         intervals = sorted(intervals, key=lambda e: e.start)
         current = intervals[0]
         for interval in intervals[1:]:
