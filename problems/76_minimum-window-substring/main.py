@@ -13,6 +13,7 @@ class Solution(object):
         tail = 0
         for head in xrange(len(s)):
             # if we dont yet have a valid substring, keep moving
+            # keep collecting chars
             if s[head] in charToCount:
                 if charToCount[s[head]] == 0:
                     count += 1
