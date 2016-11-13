@@ -1,41 +1,46 @@
 # https://leetcode.com/problems/decode-string/
-# Algorithm
-# Our encode will do this:
-# strs = ["hello", "world"]
-# strs --> encode --> "5:hello5:world"
-# "5:hello5:world" --> decode --> ["hello", "world"]
+
+# s = "3[a]2[bc]", return "aaabcbc".
+# s = "3[a2[c]]", return "accaccacc".
+# s = "2[abc]3[cd]ef", return "abcabccdcdcdef".
 
 
-class Codec:
+# Algorithm Explanation
 
-    def encode(self, strs):
-        """Encodes a list of strings to a single string.
-
-        :type strs: List[str]
+class Solution(object):
+    def decodeString(self, s):
+        """
+        :type s: str
         :rtype: str
         """
-        encoded = ''.join("%d:" % len(s) + s for s in strs)
-        return encoded
-
-    def decode(self, s):
-        """Decodes a single string to a list of strings.
-
-        :type s: str
-        :rtype: List[str]
-        """
-        decoded = []
+        numStack = []
+        charStack = []
+        res = ""
         i = 0
         while i < len(s):
-            # j will mark the index of columns ":"
-            j = s.find(":", i)
-            # send the i to next number position
-            i = 1 + j + int(s[i:j])
-            # extract the substring using j and i
-            string = s[j+1: i]
-            decoded.append(string)
-        return decoded
-
-
-# Your Codec object will be instantiated and called as such:
-# codec = Codec()
-# codec.decode(codec.encode(strs))
+            if ord(s[i]) in xrange(48, 58):
+                num = ""
+                # consume the digit until it ends.
+                while i < len(s) and ord(s[i]) in xrange(48, 58):
+                    num += s[i]
+                    i += 1
+                numStack.append(int(num))
+                continue
+            elif s[i] == "[":
+                charStack.append("")
+            elif s[i] == "]":
+                num = numStack.pop()
+                string = charStack.pop()
+                if charStack:
+                    parent = charStack.pop()
+                    charStack.append(parent + string*num)
+                else:
+                    res += string*num
+            else:
+                if charStack:
+                    parent = charStack.pop()
+                    charStack.append(parent + s[i])
+                else:
+                    res += s[i]
+            i += 1
+        return res
