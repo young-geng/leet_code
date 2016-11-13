@@ -6,6 +6,16 @@
 
 
 # Algorithm Explanation
+# We keep two stacks one for numbers and other is for chars.
+# We walk through the array and if we ever encounter an open parant
+# we add an empty string to our char stack. Next time we encounter a char while
+# there is still elems in our char stack it means we need to append that char
+# to the elem in our front of the stack.
+# If we ever encounter a closing parant we need pop from both stacks
+# combine the number and string and either add it to the front of our char stack
+# or better yet if the stack went empty, we need to add it to the result string
+# and continue traversing until we hit the end.
+
 
 class Solution(object):
     def decodeString(self, s):
@@ -25,6 +35,7 @@ class Solution(object):
                     num += s[i]
                     i += 1
                 numStack.append(int(num))
+                # we already incremented i index so continue
                 continue
             elif s[i] == "[":
                 charStack.append("")
