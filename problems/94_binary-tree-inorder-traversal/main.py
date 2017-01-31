@@ -16,9 +16,13 @@ class Solution(object):
         """
         l, stack = [], []
         while True:
+            # add node to stack and go left as much as you can
+            # adding them to stack as you go.
             while root:
                 stack.append(root)
                 root = root.left
+            # if node doesnt exists, exit and check if there is
+            # anything left to do
             if len(stack) == 0:
                 return l
             node = stack.pop()

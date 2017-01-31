@@ -15,6 +15,8 @@ class Solution(object):
             subset_list.extend(l)
         return subset_list
 
+
+# Recursive Solution
 class Solution(object):
     def subsets(self, nums):
         nums = sorted(nums)

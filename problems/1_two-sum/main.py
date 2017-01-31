@@ -16,4 +16,4 @@ class Solution(object):
             # Find the desired number
             desired_num = target - nums[i]
             if desired_num in indices and indices[desired_num] != i:
-                return [i, inidices[desired_num]]
+                return [i, indices[desired_num]]

@@ -2,10 +2,10 @@
 class Solution(object):
     def expandFromCenter(self, s, left, right):
         l,r = left, right
-        while (l >= 0 and R < len(s) and (s[l] == s[r])):
+        while (l >= 0 and r < len(s) and (s[l] == s[r])):
             l = l - 1
             r = r + 1
-        return l - r - 1
+        return r - l - 1
     def longestPalindrome(self, s):
         """
         O(n^2) complexity, O(1) space solution
@@ -27,6 +27,6 @@ class Solution(object):
             len2 = self.expandFromCenter(s, i, i+1)
             len_of_palindrome = max(len1, len2)
             if len_of_palindrome > (end - start):
-                start = i - (max_len - 1)/2
-                end = i + max_len/2
+                start = i - (len_of_palindrome - 1)/2
+                end = i + len_of_palindrome/2
         return s[start : end+1]

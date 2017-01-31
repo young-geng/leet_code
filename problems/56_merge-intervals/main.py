@@ -26,14 +26,16 @@ class Solution(object):
             return target.start <= source.end
 
         def merge_two(i1, i2):
+            # new start becomes the smallest of the two intervals' start
             start = i1.start if i1.start <= i2.start else i2.start
+            # new end becomes the largest of the two ends
             end = i1.end if i1.end >= i2.end else i2.end
             return Interval(start, end)
 
         if len(intervals) == 0: return []
 
         output = []
-        # sort intervals by start
+        # sort intervals by start.
         intervals = sorted(intervals, key=lambda e: e.start)
         current = intervals[0]
         for interval in intervals[1:]:
