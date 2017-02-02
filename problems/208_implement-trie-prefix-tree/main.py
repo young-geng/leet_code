@@ -1,7 +1,7 @@
 class TrieNode(object):
     def __init__(self, val):
         self.val = val
-        self.nxt = {}
+        self.next = {}
         self.word = ''
 
 class Trie(object):
@@ -12,7 +12,6 @@ class Trie(object):
         """
         self.root = TrieNode(None)
 
-
     def insert(self, word):
         """
         Inserts a word into the trie.
@@ -21,9 +20,10 @@ class Trie(object):
         """
         curr = self.root
         for c in word:
-            if c not in curr.nxt:
-                curr.nxt[c] = TrieNode(c)
-            curr = curr.nxt[c]
+            if c not in curr.next:
+                curr.next[c] = TrieNode(c)
+            curr = curr.next[c]
+        # leaf node has word field storing the entire word.
         curr.word = word
 
 
@@ -35,9 +35,10 @@ class Trie(object):
         """
         curr = self.root
         for c in word:
-            if c not in curr.nxt:
+            if c not in curr.next:
                 return False
-            curr = curr.nxt[c]
+            curr = curr.next[c]
+        # curr node must have the word field filled from insertion.
         return curr.word != ''
 
 
@@ -48,16 +49,16 @@ class Trie(object):
         :rtype: bool
         """
         curr = self.root
-        for c in word:
-            if c not in curr.nxt:
+        for c in prefix:
+            if c not in curr.next:
                 return False
-            curr = curr.nxt[c]
-        return curr.word != '' or len(curr.nxt) > 0
+            curr = curr.next[c]
+        return True
+        # to be more rigorous
+        # return curr.word != '' or len(curr.next) > 0
 
-
-if __name__ == "__main__":
 # Your Trie object will be instantiated and called as such:
-    obj = Trie()
-    obj.insert(word)
-    param_2 = obj.search(word)
-    param_3 = obj.startsWith(prefix)
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
