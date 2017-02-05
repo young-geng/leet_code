@@ -1,4 +1,6 @@
 # https://leetcode.com/problems/shortest-word-distance-ii/
+### FANTASTIC QUESTION ####
+
 
 # This is a follow up of Shortest Word Distance. The only difference is now you are given the list of words and your method will be called repeatedly many times with different parameters. How would you optimize it?
 #
@@ -9,7 +11,24 @@
 #
 # Given word1 = “coding”, word2 = “practice”, return 3.
 # Given word1 = "makes", word2 = "coding", return 1.
+"""
+Idea is that by storing a hashtable that maps the word -> [indices] we only
+need to walk the giant list only ONCE at the beginning. After that for every
+query:
+* get word1 indices list as list1
+* get word2 indices list as list2
+walk both lists to find the pair of indices that has the minimum distance
 
+ONE IMPORTANT point here is that we added these indices to our lists in ORDER
+so the indices themselves are sorted. Essentially the problem now becomes
+find the two indices i, j in sorted arrays A and B such that dist(i, j) is
+minimized. This can be solved in linear time. In fact it is going to be
+dependent on the list with the smaller length.
+
+Warm uptime: O(N)
+Query time: O(N)
+Space: O(N)
+"""
 from collections import defaultdict
 
 class WordDistance(object):
