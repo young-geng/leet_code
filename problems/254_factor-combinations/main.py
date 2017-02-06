@@ -28,6 +28,7 @@ class Solution(object):
             while i**2 <= num:
                 if num % i == 0:
                     stack.append(i)
+                    # do this so that when stack gets popped it still persists.
                     res.append(list(stack) + [num/i])
                     factor_helper(num/i, i, stack, res)
                     stack.pop()
