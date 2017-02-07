@@ -15,3 +15,18 @@ class Solution(object):
             inorder(root.right, lst)
             return lst
     return inorder(root, lst)[k-1]
+
+    def iterativekthSmallest(self, root, k):
+        l, stack = [], []
+        while len(l) < k:
+            while root:
+                stack.append(root)
+                root = root.left
+
+            if len(stack) == 0:
+                return
+            node = stack.pop()
+            l.append(node.val)
+            root = node.right
+
+        return l[-1]
