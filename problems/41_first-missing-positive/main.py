@@ -4,6 +4,9 @@
 In this quesiton I am using the invariant that A[i] should contain value i+1
 Rest is this explanation:
 
+Time: O(N)
+Space: O(1)
+
 http://stackoverflow.com/questions/1586858/find-the-smallest-integer-not-in-a-list
 """
 
