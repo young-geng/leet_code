@@ -11,6 +11,9 @@ class DListNode(object):
         self.next = next
 
 class DList(object):
+    """
+    DList class
+    """
     def __init__(self):
         self.head = DListNode()
         self.head.next = self.head
@@ -19,13 +22,12 @@ class DList(object):
 
     def insertFront(self, node):
         """
-        Always a add a new node right after the sentinel node.
-        This newly added node becomes the new head.
+        Always add a new node right after the sentinel node.
         """
-        if self.size == 0:
-            self.head.next = front
-            node.prev = head
-            self.head.prev = front
+        if not self.size:
+            self.head.next = node
+            node.prev = self.head
+            self.head.prev = node
             node.next = self.head
         else:
             rest = self.head.next
@@ -36,6 +38,9 @@ class DList(object):
         self.size += 1
 
     def insertBack(self, node):
+        """
+        Inserts a node to the end of the list.
+        """
         if self.size == 0:
             self.insertFront(node)
         else:
@@ -47,6 +52,9 @@ class DList(object):
             self.size += 1
 
     def removeNode(self, node):
+        """
+        Remove node. Doesn't return anything.
+        """
         if not node:
             return
         node.next.prev = node.prev
@@ -54,7 +62,10 @@ class DList(object):
         self.size -= 1
 
     def popTail(self):
-        # pop tail and return
+        """
+        Remove the tail node and return it.
+        Returns None if list is empty.
+        """
         if self.size == 0:
             return
         back = self.head.prev
@@ -62,44 +73,71 @@ class DList(object):
         return back
 
     def moveToHead(self, node):
-        # move a node to head of DList
+        """
+        Removes node and puts it to the front of the list.
+        """
         self.removeNode(node)
         self.insertFront(node)
 
+    # getter for head
+    def head(self):
+        """
+        Returns the head of the list. If the list is empty returns None.
+        This node is strictly the node right after the sentinel which head
+        points to.
+        """
+        if not self.size:
+            return
+        return self.head.next
+
+    def tail(self):
+        """
+        Returns the tail of list. If the list is empty returns None.
+        This node is the node that comes right before sentinel which head
+        variable points to.
+        """
+        if not self.size:
+            return None
+        return self.head.prev
 
 class LRUCache(object):
     def __init__(self, capacity):
         self.count = 0
         self.capacity = capacity
         self.dlist = DList()
-        self.cache = {} # <key, value=DListNode>
+        self.dictionary = {} # <key, value=DListNode>
 
     def get(self, key):
-        node = self.cache.get(key, None)
+        """
+        Use the hashtable to get the node in O(1) time.
+        If key doesn't exists then return -1.
+        If it does than move the node to the front of the DList.
+
+        Return:
+        node value
+        """
+        node = self.dictionary.get(key, None)
         if not node:
             return -1
         # node is accessed so move it to head of dlist
         self.dlist.moveToHead(node)
         return node.val
 
-    def set(self, key, val):
-        # if a key exists, update the value
-        # if not add to front of cache
-        node = self.cache.get(key, None)
+    def put(self, key, value):
+        # if key exists, update its value
+        node = self.dictionary.get(key, None)
         if node:
-            node.val = val
-            # move to cache head
+            node.val = value
             self.dlist.moveToHead(node)
         else:
-            # node doesnt exist, put it to cache checking the capacity
-            node = DListNode(key=key,val=val)
-            self.cache[key] = node
+            # node doesnt exists
+            node =  DListNode(key, value)
+            # now if cap is reached, remove the last entry
+            if self.count >= self.capacity:
+                eldest = self.dlist.popTail()
+                del self.dictionary[eldest.key]
+                self.count -= 1
+
+            self.dictionary[key] = node
             self.dlist.insertFront(node)
             self.count += 1
-            # capacity breached, invalidate the tail in cache
-            if self.count > self.capacity:
-                # remove tail from cache dlist
-                tail = self.dlist.popTail()
-                # remove tail from hashtable
-                del self.cache[tail.key]
-                self.count -= 1    
