@@ -7,7 +7,7 @@
 # from the head when we encounter something new and we can poop out from the
 # tail at the same time to "slide" the window to right.
 
-import collections
+from collections import deque
 class MovingAverage(object):
 
     def __init__(self, size):
@@ -15,7 +15,7 @@ class MovingAverage(object):
         Initialize your data structure here.
         :type size: int
         """
-        self.window = collections.deque(maxlen=size)
+        self.window = deque(maxlen=size)
 
     def next(self, val):
         """
