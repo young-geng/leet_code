@@ -3,6 +3,11 @@
 """
 Dynamic Programming
 
+Go through the array keeping two pointers to denote begin and end of the subarray.
+Do this for subarrays size 2, 3, ... ,N
+
+For each of the subarrays we have:
+
 We have the following cases:
 LPS[i, i] = 1 ; every single char is a palindrome of itself
 LPS[i, j] = 2 if j=i+1 ; sequence only has 2 characters
