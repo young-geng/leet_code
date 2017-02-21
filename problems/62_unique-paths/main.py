@@ -6,9 +6,13 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        p = [[1 for x in xrange(n)] for x in xrange(m)]
+        # create a 2D (mxn) memo table.
+        # memo[i][j] refers to number of ways to get to location (i,j)
+        # going only right or down.
+        # base cases are 1.
+        memo = [[1 for x in xrange(n)] for x in xrange(m)]
+
         for i in xrange(1, m):
             for j in xrange(1, n):
-                p[i][j] = p[i-1][j] + p[i][j-1]
-        return p[m-1][n-1]
-    
+                memo[i][j] = memo[i-1][j] + memo[i][j-1] # coming from up or left.
+        return memo[m-1][n-1]
