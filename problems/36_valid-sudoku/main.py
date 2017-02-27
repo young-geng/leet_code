@@ -1,6 +1,6 @@
 # https://leetcode.com/problems/valid-sudoku/
 
-# We are going to have to check row, col and each square starting
+# We are going to have to check row, col and each 3x3 square starting
 # from the top left corner as 0,0 and moving on to each row and column and square
 # to keep a HashSet of things we have seen. We will add things as such:
 #     * '4' in row 7 will be encoded as "(4)7"
