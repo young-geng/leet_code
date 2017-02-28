@@ -13,6 +13,7 @@ class Solution(object):
         k = m + n - 1
         while k >= 0:
             # moving from the back, check if nums1 is bigger
+            # or if the small array has ended.
             if j < 0 or (i >= 0 and nums1[i] > nums2[j]):
                 nums1[k] = nums1[i]
                 i -= 1
