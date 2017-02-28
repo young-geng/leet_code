@@ -1,6 +1,7 @@
 # https://leetcode.com/problems/first-missing-positive/
 
 """
+Similar to Bloomberg's question for Brian.
 In this quesiton I am using the invariant that A[i] should contain value i+1
 Rest is this explanation:
 
