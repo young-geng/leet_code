@@ -33,6 +33,7 @@ class Solution(object):
         if len(intervals) == 0: return 0
 
         pq = MyHeap(key=lambda t: t.end)
+        # sort intervals by start times
         intervals = sorted(intervals, key=lambda i: i.start)
         pq.push(intervals[0])
         for current in intervals[1:]:
